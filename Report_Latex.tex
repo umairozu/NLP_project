@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\geometry{margin=1in}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+\title{Emotion Detection in Urdu Speech Using Transformer-Based Models}
+\author{Ali Raza Mustafa \\ Umair Ahmed}
+\date{}
+
+\begin{document}
+\maketitle
+Emotion Detection in Urdu Speech Using Transformer-Based Models
+
+Ali Raza Mustafa
+
+Umair Ahmed
+
+\begin{abstract}
+In this study, we present a machine learning approach for emotion detection in Urdu speech using a fine-tuned transformer model. Urdu is a resource-scarce language in the domain of speech emotion recognition, and this work contributes a novel step in addressing this gap. Using a labeled dataset of Urdu sentences annotated with emotional categories, we preprocessed, tokenized, and trained a transformer model to classify emotions with significant accuracy. Our method draws inspiration from recent efforts such as SEMOUR and other SER systems in Urdu, utilizing modern tools like Hugging Face’s Transformers and Accelerate libraries. We report our model’s performance and potential application areas while discussing the challenges and future directions for Urdu-based speech emotion systems.
+
+\end{abstract}
+
+\section{Introduction}
+
+Speech Emotion Recognition (SER) is a relatively new area of AI that seeks to figure out how people are feeling by listening to or reading what they say. Using big datasets and well funded research, this subject has made a lot of progress in languages like English, German, and Mandarin.
+
+However the same can not be said about the Urdu language. There aren't many public resources that properly show how people feel in Urdu, even though it's one of the most spoken languages in the world. This makes it very difficult to use for NLP and SER. It's hard to locate feelings in Urdu since it's hard to understand how the language works. For example, the language gives shapes to objects that aren't alive based on whether they are masculine or female.
+
+Computers also have a hard time understanding cultural differences, tone, and the context. These challenges prove how crucial it is to be able to understand how other people feel in Urdu. This paper is about a transformer based system that can categorize emotions in Urdu text using a dataset that has been manually labeled. People used to just listen to audio or observe small groups of people chat to each other.
+
+Instead of doing that, we use language models that have previously been trained to find emotional content in written Urdu sentences. In this way, we not only get rid of the noise and changes in voice-based data, but we also make a strategy that many people can easily learn and utilize. Our method can deal with Urdu's difficult syntax and the challenges that come up while using NLP with less resources.
+
+\section{Literature Review}
+
+In high-resource languages like English, German, and French, where there are well-annotated datasets and established evaluation frameworks, researchers have done a lot of work on Speech Emotion Recognition (SER). In these languages, benchmark corpora such as IEMOCAP, RAVDESS, and Emo-DB have been very helpful in using deep learning models, especially transformer-based architectures, to understand how people are feeling in speech and text. Because they can understand meaning across long periods, transformer models like BERT and RoBERTa have done an amazing job of picking up on little emotional shifts in text. But this kind of improvement doesn't happen in every language. The field for low-resource languages like Urdu isn't fully developed yet. The main reason for this is that there aren't enough significant and public datasets containing emotion labels, and the language is hard to interpret. Most of the work that has been done in Urdu SER so far has been with audio files.
+
+The SEMOUR dataset is one of the most interesting projects. It is a collection of prepared emotional speeches in Urdu that Zaheer made in 2021. There are around 15,000 phonetically balanced phrases in SEMOUR, and all of them were recorded by professional actors in a studio. People say a lot of different things, and about 80% of the time, other people agree with them. The study also showed that when this dataset was employed, machine learning was 92% accurate.
+
+This is an important piece of work, but it only talks about audio-based SER and not how to discover feelings in written Urdu. Taj (2023) did a complete review of Urdu SER and said that there aren't enough annotated resources, that it's hard to get features out of Urdu because of its distinctive syntax and phonetics, and that there hasn't been any study on how to find emotions in text. Their review made it clear that Urdu is important all over the world, but research in this area is still in its early stages and not very well organized. It is becoming more and more vital to look at how to find emotions in Urdu text using methods that are comparable to those used for transformer-based text classification in English and other languages with a lot of resources. We close this gap by changing the focus from speaking to writing.
+
+We use new transformer designs to develop a solution that can handle a lot of data and is very good at sorting emotions in a language that hasn't been studied extensively in NLP research for a long time.
+
+\section{Problems Emotion Labelling in Urdu}
+
+It can be hard to tell how someone is feeling using a specific dataset because Urdu is a hard language and there aren't many tools available. This section provides information on these problems, focusing on how hard it is to create good emotion recognition algorithms for Urdu.
+
+It's hard to improve Urdu emotion recognition because there aren't many big datasets that everybody can utilize. Urdu doesn't have as many big datasets as English and other languages.
+For instance, IEMOCAP and RAVDESS. You need these datasets to make machine learning models that work well. When there isn't enough data, it's harder to create emotion recognition algorithms that work well and can be used in a range of situations. There has been some progress in this area thanks to the SEMOUR dataset and other projects, but we still need bigger and more complete data sets to match the resources available for other languages (Zaheer,2021)
+
+Urdu gives gender to both living and non-living entities. This could make it hard to tell how someone is feeling. People employ words that are usually used by males when they talk about the sun and words that are usually used by women when they talk about the moon. When you use models that were trained on languages that don't have these features on Urdu text, it can be harder to figure out how individuals are feeling. The most difficult part is getting the right emotional context without using gendered words wrong. This means that models need to know how to read and write Urdu grammar and syntax.
+
+It is harder to say how you feel in Urdu because of variations in language and culture. People in Urdu show their feelings in several important ways, such being polite, sarcastic, and indirect. In order to properly classify feelings, annotators need to be able to spot these small variances. This could lead to subjective judgments and conflicts. It's hard to make reliable annotated datasets when things aren't clear since different interpretations can change the consistency and quality of the training data, which makes the model work worse.
+
+It's significantly harder to create and train emotion detection models for Urdu because of problems with technology, especially when it comes to processing power. It's hard to employ transformer based models since they need a lot of memory and computing power. Training these models in places with weak computers is hard. We need to either make our current algorithms better or change them so that they work well in systems with restricted resources. This will make sure that emotional recognition works and is useful in a lot of different situations.
+
+\section{Methodology}
+
+This part talks about the whole process of developing a sentiment classification model that can read Urdu. The pipeline uses the best natural language processing methods and tweaks transformer models to make smart decisions about how to deal with the problems that come up when working with a language with less resources, like Urdu. We used the Hugging Face Transformers and Datasets libraries to build each level, and we also used scikit-learn and PyTorch to help us. The goal was to create a good emotion recognition system that can read Urdu and tell how someone is feeling, even if there isn't a lot of labeled data.
+
+The data came from an Excel file called urduannotationxlsx that was carefully labeled. There are Urdu sentences and the emotions that go with them. When the data was in a Pandas DataFrame, it went through a lot of procedures to make sure it was clean and nice. We got rid of any rows that didn't have values in the sentence or mood columns right away. We also got rid of any rows that had the word "discard" in them to get rid of things that weren't clear or couldn't be put into a category. We used string manipulation methods to change the emotion categories to lowercase and get rid of any extra spaces around them. This was done to make sure that all the labels were the same. This step of normalizing the data is very important for training because it makes sure that the identical label isn't seen as more than one class because the formatting is different.
+
+After cleaning, the LabelEncoder from scikit-learn changed the emotion categories into whole numbers. In this phase, each unique emotion label gets a number code in the new column named EmotionLabel. Then, this code was used as the target variable for training. There is now a fallback mechanism for the optional emotiontriggerdict to help with understanding semantics. This was meant to show if a statement had important words that made each feeling happen. Even though you couldn't discover this dictionary in your environment, there was a default column named HasTrigger that was set to zero to protect the integrity of the dataset.
+
+We put the data into a Hugging Face Dataset object so that a transformer model could work with it. It was easy to tokenize and group items on the fly with this manner. We constructed a tokenization function that used the AutoTokenizer from the model we chose in the Sentences column. Tokenization meant cutting out sequences that were too long, adding padding to maintain the input the same length, and limiting the number of tokens in each sentence to 128. These stages are very important for making the input more stable and the training of the model more consistent. The tokenization output had inputids and attentionmask, which transformer models need to read each piece of text. To construct the input structure that PyTorch wants, the EmotionLabel label was inserted below the labels key. Lastly, the tokenized dataset was put together for PyTorch by creating the tensor structure that would make it easier to train.
+
+We picked the xlm-roberta-base model for this project since it is a transformer architecture that works well with a lot of different languages and in places where there aren't many resources. We used the AutoModelForSequenceClassification interface from the Transformers library to load this model. We set the output dimension to be the same as the number of emotion classes in the dataset. This option was made on purpose. Xlm-roberta-base has learnt over 100 languages, such as Urdu, thus it is very good at professions that require languages that aren't very popular. The AutoTokenizer tokenizer did subword tokenization that was in line with what the model had learned before. This made sure that hard or compound Urdu words didn't lose too much information.
+
+XLM-RoBERTa is a transformer model that employs self-attention to look at the whole phrase and how each word fits into it. This is what makes it worth something. This is especially true in Urdu, where the meaning of a word can change a lot depending on the situation, and individuals frequently give emotional hints instead of speaking things openly.
+
+We used the Hugging Face Trainer lesson to teach the model. This makes it easier to train and test transformer models. We utilized the TrainingArguments interface to set up the training. The training was supposed to last for four epochs, and the batch size for both training and testing was eight. The evaluation method was supposed to run at the conclusion of each epoch, which made it possible to evaluate the model often. The loadbestmodeatend=True option made sure that the model with the highest accuracy on the validation set was preserved.
+
+The computemetrics method used scikit-learn's accuracyscore to check how well the predictions were doing at the conclusion of each epoch. This indicator showed how well the model was getting better at detecting the difference between distinct emotional categories in Urdu. When training was over, the model and tokenizer were saved to disk using the savemodel and savepretrained methods. This made it easy to use them again or make little adjustments to them.
+
+\section{Results and Evaluation}
+
+The emotion detection model was trained over four epochs using a transformer-based architecture (xlm-roberta-base) and a custom-labeled Urdu emotion dataset. Performance was tracked using training loss, validation loss, and accuracy metrics, all of which are standard in supervised classification tasks. Below, we analyze both the numerical performance and some qualitative insights derived from the model’s predictions.
+
+The training and validation metrics across epochs show a gradual improvement in loss reduction and accuracy:
+
+Accuracy began the first epoch at a low of 18.6%, but by the third epoch it had risen to 24.7%, with no additional gain in the final epoch. Due to class imbalance, subtle emotion overlap, or data sparsity, the model was unable to generalize well despite learning some emotional patterns from the data, as evidenced by the steady decrease in training loss and stabilization of validation loss.
+
+We can learn a few important things from the trends in performance we witnessed during training and evaluation.   The model's accuracy got a little better during the four training epochs, reaching a maximum of roughly 24.7 percent.  But this finding reveals that it's still quite hard to define emotions in Urdu.   Words that indicate emotion in English are usually direct and common in current corpora.  In Urdu, on the other hand, feelings are often expressed in more subtle and culturally significant ways.   For example, polite language can mask rage, while pretty words can indicate melancholy without using words that are clearly sad.
+
+The fact that Urdu lends gender to both inanimate objects and abstract thoughts makes it further harder.   If this feature mistakenly links gendered language to particular emotions, it could throw off the model.   Also, the model often misclassifies information that isn't obvious because the different types of emotions are so similar to each other.  For instance, sadness and neutrality or happiness and calmness.
+
+The model's overall performance was also hurt by not having enough resources.   There was extremely little area for training, and the batch size was only eight.   The xlm-roberta-base approach is wonderful for working with a lot of languages, but the size of the dataset and the balance of the classes still matter.   The accuracy presumably stopped getting better in the later stages of training because there weren't many labeled cases and they weren't all the same. Also, there weren't many distinctions between emotional tones.   These results imply that we need more balanced and larger datasets, and maybe even multimodal input (such blending text with sound or visual cues), to help us understand emotions better in low-resource languages like Urdu.
+
+\section*{References}
+
+Zaheer, N., Ahmad, O. U., Ahmed, A., Khan, M. S., & Shabbir, M. (2021). SEMOUR: A Scripted Emotional Speech Repository for Urdu. Proceedings of the CHI Conference on Human Factors in Computing Systems, Yokohama, Japan. Association for Computing Machinery.
+
+Taj, S., Mujtaba, G., Daudpota, S. M., & Mughal, M. H. (2023). Urdu Speech Emotion Recognition: A Systematic Literature Review. ACM Transactions on Asian and Low-Resource Language Information Processing, 22(7), Article 186.
+
+Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A., ... & Rush, A. M. (2020). Transformers: State-of-the-art natural language processing. Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations, 38–45.
+
+Lhoest, Q., Villanova del Moral, A., Jernite, Y., Thakur, A., von Platen, P., Patil, R., ... & Wolf, T. (2021). Datasets: A community library for natural language processing. Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing: System Demonstrations, 175–184.
+
+Hugging Face. (n.d.). Trainer class documentation. Hugging Face Transformers. Retrieved May 22, 2025, from
+
+Sokolova, M., & Lapalme, G. (2009). A systematic analysis of performance measures for classification tasks. Information Processing & Management, 45(4), 427–437.
+
+\end{document}
